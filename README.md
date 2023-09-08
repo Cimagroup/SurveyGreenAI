@@ -17,3 +17,4 @@ https://github.com/stolzbernadette/Outlier-robust-subsampling-techniques-for-per
 
 https://github.com/Cimagroup/Experiments-Representative-datasets
 
+[Methods.xlsx](https://github.com/Cimagroup/SurveyGreenAI/files/12558633/Methods.xlsx)
