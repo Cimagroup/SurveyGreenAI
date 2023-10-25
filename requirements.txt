@@ -1,0 +1,8 @@
+numpy==1.23.5
+scikit-learn==1.2.1
+scipy==1.10.0
+cython==3.0.2
+ripser==0.6.4
+networkx==2.8.4
+GitPython==3.1.36
+git+https://github.com/bghojogh/Principal-Sample-Analysis.git

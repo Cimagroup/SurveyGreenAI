@@ -1,7 +1,46 @@
 import numpy as np
 import random
 
+def maxmin_selector(X,y,perc,p=np.inf):
+    
+    if not (0 <= perc <= 1):
+        raise ValueError("perc must be a number between 0 and 1")
+    else:
+        picks = np.array([],dtype=int) 
+        classes = np.unique(y)
+        for cl in classes:
+            pool_cl = np.where(y==cl)
+            X_cl = X[pool_cl]
+            pool_cl = np.reshape(pool_cl,(-1,))
+            picks_cl = maxmin_from_class(X_cl,pool_cl,n=len(pool_cl)*perc,p=p)
+            picks = np.append(picks,picks_cl)
+        return np.sort(picks)
+    
+    
+def maxmin_from_class(data, pool_cl, n, p=np.inf):
+    
+    if n <= 0:
+        raise ValueError("Error: n must be a positive number")
+    else:
+        lendata = len(pool_cl)
+        if n >= lendata:
+            return pool_cl
+        else:
+            pool=np.arange(lendata)
+            r=random.randrange(lendata)
+            picks= np.array([r],dtype=int)
+            pool=np.delete(pool,r)
+            picked=1
+            distmat=np.array([[r,pool[0],np.linalg.norm(np.subtract(data[picks[0]],data[pool[0]]),ord=p)]])
+            for i in range(1,lendata-1):
+                distmat = np.vstack((distmat,np.array([[r,pool[i],np.linalg.norm(np.subtract(data[picks[0]],data[pool[i]]),ord=p)]])))
+            while picked < n:
+                picks, pool, distmat = pick_one(picks,pool,data,distmat,picked,p)
+                picked+=1
+            return np.sort(pool_cl[picks])
+
 def pick_one(picks,pool,data,distmat,picked,p):
+                    
     n_pool=len(pool)
     current_max=0
     current_index=-1
@@ -13,6 +52,7 @@ def pick_one(picks,pool,data,distmat,picked,p):
     return picks, pool, distmat
 
 def min_search(i,picks,pool,data,distmat,picked,current_max,current_index,p):
+                    
     current_min = np.inf
     pooli = pool[i]
     for j in range(picked):
@@ -33,25 +73,6 @@ def min_search(i,picks,pool,data,distmat,picked,current_max,current_index,p):
     return current_max, current_index, distmat
         
 
-def maxmin_selector(data, n, p=2):
-    
-    if n <= 0:
-        print("n must be a positive number")
-    elif n >= len(data):
-        return np.arange(len(data))
-    else:
-        lendata = len(data)
-        pool=np.arange(lendata)
-        r=random.randrange(lendata)
-        picks= np.array([r])
-        pool=np.delete(pool,r)
-        picked=1
-        distmat=np.array([[r,pool[0],np.linalg.norm(np.subtract(data[picks[0]],data[pool[0]]),ord=p)]])
-        for i in range(1,lendata-1):
-            distmat = np.vstack((distmat,np.array([[r,pool[i],np.linalg.norm(np.subtract(data[picks[0]],data[pool[i]]),ord=p)]])))
-        while picked < n:
-            picks, pool, distmat = pick_one(picks,pool,data,distmat,picked,p)
-            picked+=1
-        return np.sort(picks)
+
         
  
