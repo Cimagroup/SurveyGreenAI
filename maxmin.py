@@ -1,21 +1,6 @@
 import numpy as np
 import random
-
-def maxmin_selector(X,y,perc,p=np.inf):
-    
-    if not (0 <= perc <= 1):
-        raise ValueError("perc must be a number between 0 and 1")
-    else:
-        picks = np.array([],dtype=int) 
-        classes = np.unique(y)
-        for cl in classes:
-            pool_cl = np.where(y==cl)
-            X_cl = X[pool_cl]
-            pool_cl = np.reshape(pool_cl,(-1,))
-            picks_cl = maxmin_from_class(X_cl,pool_cl,n=len(pool_cl)*perc,p=p)
-            picks = np.append(picks,picks_cl)
-        return np.sort(picks)
-    
+  
     
 def maxmin_from_class(data, pool_cl, n, p=np.inf):
     
