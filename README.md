@@ -14,6 +14,13 @@
 |                                                                                                             | Stratified sampling     | [link](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.StratifiedShuffleSplit.html) |
 
 
+## List of datasets
+
+| File | Description | Link to owner repository |
+|------|-------------|--------------------------|
+|      |             |                          |
+|      |             |                          |
+
  ### TBD:
 
 -Métodos basados en Nearest Neighbours: CNN, ENN, RENN, All-kNN (métodos wrapper, solo valen para kNN)
