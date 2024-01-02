@@ -7,6 +7,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.model_selection import StratifiedShuffleSplit
 from sklearn.cluster import KMeans
 from scipy.spatial import distance_matrix
+import faiss
 
 ##############################################################################
 #SRS
@@ -144,17 +145,17 @@ def des_selection(X, y, perc, perc_base):
     X_Pool,X_Base,y_Pool,y_Base= train_test_split(X, y,stratify=y,test_size=perc_base,random_state=42,shuffle=True)
     
     #STEP 2: Calculate class prototypes in Base Data
-    centros=[]
-    val, cont = np.unique(y_Base,return_counts=True)
-    for i in val:
-        ind_i=np.where(y_Base==i)
-        suma = sum(X_Base[ind_i])
-        centro=suma/cont[i]
-        centros.append(centro)
-     
+    centers=[]
+    classes = np.unique(y_Base)
+    for cl in classes:
+        pool_cl = np.where(y_Base==cl)
+        X_cl = X_Base[pool_cl]
+        center_cl = np.mean(X_cl, axis=0)
+        centers.append(center_cl)
+        
     #STEP 3: Calculate the distance-entropy indicator for Pool Data
-    entropies = [entropy(softmax(listEuclidean(x,centros))) for x in X_Pool]
-    
+    entropies = [entropy(softmax(listEuclidean(x,centers))) for x in X_Pool]
+
     #STEP 4: Order Pool Data by distance-entropy indicator
     adi = math.trunc(perc*len(y)) - len(y_Base)
     entroMaxs = sorted(entropies,reverse=True)[:adi]
@@ -162,11 +163,11 @@ def des_selection(X, y, perc, perc_base):
     for en in entroMaxs:
         in_add.append(np.where(np.array(entropies) == en)[0][0])
         
-    X_adicionantes=X_Pool[in_add]
-    y_adicionantes=y_Pool[in_add]
+    X_add=X_Pool[in_add]
+    y_add=y_Pool[in_add]
     
-    X_res = np.append(X_Base,X_adicionantes,axis=0)
-    y_res = np.append(y_Base,y_adicionantes)
+    X_res = np.append(X_Base,X_add,axis=0)
+    y_res = np.append(y_Base,y_add)
     
     return X_res, y_res
 
@@ -174,39 +175,15 @@ def des_selection(X, y, perc, perc_base):
 #DOM
 #Dominating Datasets Selection (Esto usa mi código, no el del github del grupo)
 
-def dom_selection(X,y,epsilon=0.1,p=np.inf):
-    
-    picks = np.array([],dtype=int) 
-    classes = np.unique(y)
-    for cl in classes:
-        pool_cl = np.where(y==cl)
-        X_cl = X[pool_cl]
-        pool_cl = np.reshape(pool_cl,(-1,))
-        picks_cl = pick_from_class(X_cl,pool_cl,epsilon,p)
-        picks = np.append(picks,picks_cl)
-    picks = np.sort(picks)
+sys.path.append("Original_repositories/Experiments-Representative-datasets-master/notebooks")
+from dominating import dominating_dataset
+
+def dom_selection(X,y,epsilon=1):
+    picks = dominating_dataset(X,y,epsilon)
     X_res = X[picks]
     y_res = y[picks]
     return X_res, y_res
-
-def pick_from_class(X_cl,pool_cl,epsilon=0.1,p=np.inf):
     
-    lenpool_cl, dim = np.shape(X_cl)
-    if epsilon <=0:
-        return pool_cl
-    else:        
-        picks_cl = np.array([],dtype=int)
-        pool_aux = np.arange(0,lenpool_cl)
-        while lenpool_cl > 0:
-            r = random.randrange(lenpool_cl)
-            picks_cl = np.append(picks_cl, pool_cl[r])
-            m = distance_matrix(np.reshape(X_cl[pool_aux[r]],(-1,dim)),X_cl[pool_aux],p=p)[0]
-            remain = np.where(m>=epsilon)
-            pool_aux = pool_aux[remain]
-            pool_cl = pool_cl[remain]
-            lenpool_cl = len(pool_cl)
-        return picks_cl 
-
 ##############################################################################
 #PHL
 #PH Landmarks Selection
@@ -275,3 +252,31 @@ def psa_selection(X,y,perc,RANSAC):
     
     X_res, y_res = psa.reduce_data(sorted_samples,n_samples)
     return X_res, y_res
+
+##############################################################################
+#PRD
+#ProtoDash
+
+sys.path.append("Original_repositories/AIX360-master/aix360/algorithms/protodash")
+from aix360.algorithms.protodash import ProtodashExplainer
+
+def prd_selection(X,y,perc, sigma=2, optimizer='osqp'):
+    
+    picks = np.array([],dtype=int)
+    classes = np.unique(y)
+    for cl in classes:
+        
+        pool_cl = np.where(y==cl)
+        X_cl = X[pool_cl]
+        pool_cl = np.reshape(pool_cl,(-1,))
+        n_cl = math.trunc(len(X_cl)*perc)
+        print(n_cl)
+        
+        explainer = ProtodashExplainer()
+        (W, S, _) = explainer.explain(X_cl, X_cl, m=n_cl, sigma=sigma, optimizer=optimizer)
+        picks = np.append(picks,pool_cl[S])
+    picks = np.sort(picks)
+    X_res = X[picks]
+    y_res = y[picks]
+    return X_res, y_res
+        
