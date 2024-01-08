@@ -1,32 +1,33 @@
-# SurveyGreenAI
+# Beta Version - Data Reduction Repository
 
-| File                                                                    | Description                                                   |
-|-------------------------------------------------------------------------|---------------------------------------------------------------|
-| [main.py](https://github.com/Cimagroup/SurveyGreenAI/blob/main/main.py) | Main file with all the functions to compute reduced datasets. |
+This is the beta version of the data reduction repository created by the CIMAgroup research team at the University of Seville, Spain, for the European Project REXASI-PRO (REliable & eXplainable Swarm Intelligence for People with Reduced mObility) (HORIZON-CL4-HUMAN-01 programme under grant agreement nº101070028).
 
-## List of methods
+This repository reunites in a single function a list of data reduction techniques:
 
-| File                                                                                                        | Description             | Link to owner repository                                                  |
-|-------------------------------------------------------------------------------------------------------------|-------------------------|---------------------------------------------------------------------------------------------------------------|
-| [maxmin.py](https://github.com/Cimagroup/SurveyGreenAI/blob/main/maxmin.py)                                 | Maxmin method           |                                                                                                               |
-| [representative_dataset.py](https://github.com/Cimagroup/SurveyGreenAI/blob/main/representative_dataset.py) | Representative datasets | [link](https://github.com/Cimagroup/Experiments-Representative-datasets/tree/master)                          |
-| [PH_landmark_selection.py](https://github.com/Cimagroup/SurveyGreenAI/blob/main/PH_landmark_selection.py)   | PH landmark selection   | [link](https://github.com/stolzbernadette/Outlier-robust-subsampling-techniques-for-persistent-homology)      |
-|                                                                                                             | Stratified sampling     | [link](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.StratifiedShuffleSplit.html) |
+- SRS: Stratified Random Sampling
+- CLC: Clustering Centroids Selection
+- MMS: Maxmin Selection
+- DES: Distance-Entropy Selection
+- DOM: Dominating Dataset Selection
+- PHL: Persistent Homology Landmarks Selection
+- NRMD: Numerosity Reduction by Matrix Decomposition
+- PSA: Principal Sample Analysis
+- PRD: ProtoDash Algorithm
 
+To use the data reduction functions, it is necessary to install a list of libraries and clone the original repositories of the papers we are referencing to.
 
-## List of datasets
+To install all the required libraries, execute in a terminal:
 
-| File | Description | Link to owner repository |
-|------|-------------|--------------------------|
-|      |             |                          |
-|      |             |                          |
+```bash
+./conda-requirements.bat
+pip install -r requirements.txt
+``` 
+To clone all the repositories, install GitBash ([GitBash Download](https://git-scm.com/downloads)), open GitBash, and, in the "Original_Repositories" folder, execute:
 
- ### TBD:
+```bash
+./clone_repos.bat
+```
+The details of the data reduction algorithms can be read in "reduction_techniques.py". We recommend importing the function data_reduction from "main.py," which can perform any of the listed data reduction methods by changing the method parameter.
 
--Métodos basados en Nearest Neighbours: CNN, ENN, RENN, All-kNN (métodos wrapper, solo valen para kNN)
+To run an experiment comparing all the reduction techniques, go into the "Experiments" folder and run one of the five examples we provide. The results of the experiments will be saved in the folder "Results".
 
-Están en la librería imbalanced_learn, que yo al menos lo tengo preinstalado en python pero se encuentra en este enlace
-https://imbalanced-learn.org/stable/introduction.html
-
-
-[Excel con los métodos](https://uses0-my.sharepoint.com/:x:/g/personal/jperera_us_es/EQi_VVO1qJ9Kr2nzCTHEPyQB0N6eozIzUuXQ98gvZbedLg?e=KVcs4W)
