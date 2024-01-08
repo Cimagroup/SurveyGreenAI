@@ -1,0 +1,1 @@
+conda install -c conda-forge -c pytorch/label/nightly ripser==0.6.4 faiss-cpu
