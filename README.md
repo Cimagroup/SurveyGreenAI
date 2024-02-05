@@ -5,29 +5,25 @@ This is the beta version of the data reduction repository created by the CIMAgro
 This repository reunites in a single function a list of data reduction techniques:
 
 - SRS: Stratified Random Sampling
+- PRD: ProtoDash Algorithm
 - CLC: Clustering Centroids Selection
 - MMS: Maxmin Selection
 - DES: Distance-Entropy Selection
-- DOM: Dominating Dataset Selection
 - PHL: Persistent Homology Landmarks Selection
 - NRMD: Numerosity Reduction by Matrix Decomposition
 - PSA: Principal Sample Analysis
-- PRD: ProtoDash Algorithm
 
 To use the data reduction functions, it is necessary to install a list of libraries and clone the original repositories of the papers we are referencing to.
-
-To install all the required libraries, execute in a terminal:
-
-```bash
-./conda-requirements.bat
-pip install -r requirements.txt
-``` 
-To clone all the repositories, install GitBash ([GitBash Download](https://git-scm.com/downloads)), open GitBash, and, in the "Original_Repositories" folder, execute:
+To clone all the repositories, install GitBash (https://git-scm.com/downloads), open GitBash and, in the "Original_Repositories" folder, execute:
 
 ```bash
 ./clone_repos.bat
 ```
-The details of the data reduction algorithms can be read in "reduction_techniques.py". We recommend importing the function data_reduction from "main.py," which can perform any of the listed data reduction methods by changing the method parameter.
 
-To run an experiment comparing all the reduction techniques, go into the "Experiments" folder and run one of the five examples we provide. The results of the experiments will be saved in the folder "Results".
+To install the package, execute in a terminal: 
 
+```bash
+./install.bat
+```
+
+The file *Data_Reduction_Examples.ipynb* contains an example on how to use the functions from the package.
