@@ -3,7 +3,7 @@ import setuptools
 setuptools.setup(
     name="data_reduction",
     version="1.0",
-    author="Javier Perera-Lago",
+    author="Javier Perera-Lago, Victor Toscano-Duran",
     author_email= "jperera@us.es,epaluzo@uloyola.es, vtoscano@us.es",
     description="A Data Reduction Package",
     url="https://github.com/Cimagroup/vectorization-maps",
