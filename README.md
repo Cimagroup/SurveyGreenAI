@@ -51,5 +51,6 @@ conda activate name
 
 ```bash
 chmod +x ./install.sh
+sed -i -e 's/\r$//' install.sh
 ./install.sh
 ```
