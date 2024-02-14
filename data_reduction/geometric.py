@@ -69,6 +69,9 @@ def entropy(softProb):
     return -1*(np.sum(op))
 
 def des_selection(X, y, perc, perc_base):
+
+    if perc_base > perc:
+        raise ValueError("perc_base must be smaller than perc")
     
     #STEP 1: Split training dataset into Base data and Pool Data
     X_Pool,X_Base,y_Pool,y_Base= train_test_split(X, y,stratify=y,test_size=perc_base,random_state=42,shuffle=True)

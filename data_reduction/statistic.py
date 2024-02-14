@@ -1,8 +1,11 @@
-import os
+import sys
 import numpy as np
 import math
 from sklearn.model_selection import StratifiedShuffleSplit
-
+import os
+path = os.path.dirname(np.__file__)
+path = path[:-5] + "data_reduction"
+path
 ##############################################################################
 #SRS
 #Stratified Random Selection
@@ -17,9 +20,8 @@ def srs_selection(X,y,perc):
 #PRD
 #ProtoDash
 
-os.chdir("Original_repositories/AIX360")
+sys.path.append(path + "/Original_repositories/AIX360")
 from aix360.algorithms.protodash import ProtodashExplainer
-os.chdir("../../")
 
 def prd_selection(X,y,perc, sigma=2, opt='osqp'):
     
