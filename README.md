@@ -12,18 +12,44 @@ This repository reunites in a single function a list of data reduction technique
 - PHL: Persistent Homology Landmarks Selection
 - NRMD: Numerosity Reduction by Matrix Decomposition
 - PSA: Principal Sample Analysis
+- FES: Forgetting Events Selection
 
-To use the data reduction functions, it is necessary to install a list of libraries and clone the original repositories of the papers we are referencing to.
-To clone all the repositories, install GitBash (https://git-scm.com/downloads), open GitBash and, in the "Original_Repositories" folder, execute:
+To use the data reduction functions, it is necessary to install a list of libraries and clone the original repositories of the papers we are referencing to. To clone them, it is necessary to 
+
+### Installation in Windows
+
+1. Install GitBash (https://git-scm.com/downloads).
+2. Open a terminal and execute in the "data_reduction/Original_Repositories":
 
 ```bash
 ./clone_repos.bat
 ```
-
-To install the package, execute in a terminal: 
+3. To conclude the installation, go to the same location a ssetup.py and execute in a terminal: 
 
 ```bash
 ./install.bat
 ```
 
-The file *Data_Reduction_Examples.ipynb* contains an example on how to use the functions from the package.
+### Installation in Ubuntu
+
+1. Install GitBash (https://git-scm.com/downloads).
+2. Open a terminal and execute in the "data_reduction/Original_Repositories":
+
+```bash
+chmod +x ./clone_repos.sh
+./clone_repos.sh
+```
+
+3. Create a virtual environment for Python version 3.9 or higher.
+
+```bash
+conda create -n name python=3.9
+conda activate name
+```
+
+4. To conclude the installation, go to the same location as setup.py and execute in a terminal: 
+
+```bash
+chmod +x ./install.sh
+./install.sh
+```
