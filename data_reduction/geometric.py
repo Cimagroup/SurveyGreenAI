@@ -2,7 +2,7 @@ import numpy as np
 import math
 import random
 from sklearn.model_selection import train_test_split
-from sklearn.cluster import KMeans
+from scipy.cluster.vq import vq, kmeans, whiten
 from gudhi.subsampling import choose_n_farthest_points
 
 ##############################################################################
@@ -20,8 +20,8 @@ def clc_selection(X,y,perc):
         pool_cl = np.where(y==cl)
         X_cl = X[pool_cl]
         n_cl = math.trunc(len(X_cl)*perc)
-        kmeans = KMeans(n_clusters=n_cl, random_state=0, init = 'k-means++', n_init="auto").fit(X_cl)
-        X_res = np.append(X_res, kmeans.cluster_centers_)
+        centroids = kmeans(X_cl,k_or_guess=n_cl,iter=1)[0]
+        X_res = np.append(X_res, centroids)
         y_res = np.append(y_res, np.repeat(cl,n_cl))
         
     return X_res.reshape(-1, n_features), y_res
@@ -99,6 +99,9 @@ def des_selection(X, y, perc, perc_base):
     y_add=y_Pool[in_add]
     
     X_res = np.append(X_Base,X_add,axis=0)
+    y_res = np.append(y_Base,y_add)
+    
+    return X_res, y_res
     y_res = np.append(y_Base,y_add)
     
     return X_res, y_res
