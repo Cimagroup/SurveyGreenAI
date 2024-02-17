@@ -200,7 +200,9 @@ def nrmd_selection(X,y,perc,decomposition='SVD_python'):
     n = math.trunc(len(y)*perc)
     X_sorted, Y_sorted, _ = rank_samples(X=X.T, Y=y, experiment='classification', method=decomposition)
     X_reduced, Y_reduced = reduce_samples(X_sorted=X_sorted,Y_sorted=Y_sorted,n_samples_pick=n)
-    return X_reduced.T, Y_reduced[0]
+    X_red = np.copy(X_reduced)
+    Y_red = np.copy(Y_reduced[0])
+    return X_red.T, Y_red
 
 ##############################################################################
 #PSA
