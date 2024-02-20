@@ -22,7 +22,7 @@ def clc_selection(X,y,perc):
         n_cl = math.trunc(len(X_cl)*perc)
         centroids = kmeans(X_cl,k_or_guess=n_cl,iter=1)[0]
         X_res = np.append(X_res, centroids)
-        y_res = np.append(y_res, np.repeat(cl,n_cl))
+        y_res = np.append(y_res, np.repeat(cl,len(centroids)))
         
     return X_res.reshape(-1, n_features), y_res
 
