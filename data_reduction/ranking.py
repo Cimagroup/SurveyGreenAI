@@ -203,24 +203,3 @@ def nrmd_selection(X,y,perc,decomposition='SVD_python'):
     X_red = np.copy(X_reduced)
     Y_red = np.copy(Y_reduced[0])
     return X_red.T, Y_red
-
-##############################################################################
-#PSA
-#Principal Sample Analysis
-
-sys.path.append(path + "/Original_repositories/Principal-Sample-Analysis/PSA_code")
-from PSA.PSA_main import PSA
-
-def psa_selection(X,y,perc,RANSAC):
-    
-    psa = PSA(save_ranks=False, add_noisy_samples_if_not_necessary=False, number_of_added_noisy_samples=0,
-                 number_of_selected_samples_in_group=X.shape[1], number_of_iterations_of_RANSAC=RANSAC)
-    ranks = psa.rank_samples(X,y,demo_mode=False, report_steps=False, HavingClasses=True)
-    sorted_samples = psa.sort_samples_according_to_ranks(X, y, ranks)
-    labels = list(set(y))
-    n_samples = y_res = np.array([],dtype=int)
-    for l in labels:
-        n_samples = np.append(n_samples,int(np.count_nonzero(y == l)*perc)) 
-    
-    X_res, y_res = psa.reduce_data(sorted_samples,n_samples)
-    return X_res, y_res
