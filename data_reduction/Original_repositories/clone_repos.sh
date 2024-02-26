@@ -6,8 +6,5 @@ git clone https://github.com/stolzbernadette/Outlier-robust-subsampling-techniqu
 ::NRMD selection
 git clone https://github.com/bghojogh/Prototype-Selection-Matrix-Decomposition
 
-::PSA selection
-git clone https://github.com/bghojogh/Principal-Sample-Analysis
-
 ::PRD selection
 git clone https://github.com/Trusted-AI/AIX360.git
