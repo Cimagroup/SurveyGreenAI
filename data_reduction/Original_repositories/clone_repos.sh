@@ -1,10 +1,10 @@
-::Use this folder to store the codes used in this survey.
+#Use this folder to store the codes used in this survey.
 
-::PHL selection
+#PHL selection
 git clone https://github.com/stolzbernadette/Outlier-robust-subsampling-techniques-for-persistent-homology
 
-::NRMD selection
+#NRMD selection
 git clone https://github.com/bghojogh/Prototype-Selection-Matrix-Decomposition
 
-::PRD selection
+#PRD selection
 git clone https://github.com/Trusted-AI/AIX360.git
