@@ -10,6 +10,3 @@ https://github.com/stolzbernadette/Outlier-robust-subsampling-techniques-for-per
 
 NRMD selection
 https://github.com/bghojogh/Prototype-Selection-Matrix-Decomposition
-
-PSA selection
-https://github.com/bghojogh/Principal-Sample-Analysis
