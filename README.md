@@ -17,13 +17,14 @@ To use the data reduction functions, it is necessary to install a list of librar
 
 ### Installation in Windows
 
-1. Install GitBash (https://git-scm.com/downloads).
-2. Open a terminal and execute in "data_reduction/Original_Repositories":
+1. Create a virtual environment with Python >=3.9
+2. Install GitBash (https://git-scm.com/downloads).
+3. Open a terminal and execute in "data_reduction/Original_Repositories":
 
 ```bash
 ./clone_repos.bat
 ```
-3. To conclude the installation, go to the same location as setup.py and execute in a terminal: 
+4. To conclude the installation, go to the same location as setup.py and execute in a terminal: 
 
 ```bash
 ./install.bat
