@@ -3,8 +3,8 @@ import setuptools
 setuptools.setup(
     name="data_reduction",
     version="1.0",
-    author="Javier Perera-Lago, Victor Toscano-Duran",
-    author_email= "jperera@us.es,epaluzo@uloyola.es, vtoscano@us.es",
+    author="Javier Perera-Lago,Victor Toscano-Duran,Eduardo Paluzo-Hidalgo",
+    author_email= "jperera@us.es,vtoscano@us.es,epaluzo@uloyola.es",
     description="A Data Reduction Package",
     url="https://github.com/Cimagroup/vectorization-maps",
     packages=setuptools.find_packages(),
@@ -24,6 +24,8 @@ setuptools.setup(
         "xport==3.6.1",
         "cvxpy==1.4.1",
         "gudhi==3.9.0",
+        "codecarbon==2.3.4",
+        "ucimlrepo==0.0.3",
         "numpy==1.23.5",
     ],
 )
