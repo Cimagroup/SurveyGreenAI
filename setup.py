@@ -26,6 +26,7 @@ setuptools.setup(
         "gudhi==3.9.0",
         "codecarbon==2.3.4",
         "ucimlrepo==0.0.3",
+        "ripser==0.6.4",
         "numpy==1.23.5",
     ],
 )
