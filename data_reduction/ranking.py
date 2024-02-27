@@ -1,7 +1,6 @@
 import sys
 import numpy as np
 import math
-import faiss
 import os
 path = os.path.dirname(np.__file__)
 path = path[:-5] + "data_reduction"
