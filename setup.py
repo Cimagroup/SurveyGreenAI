@@ -20,7 +20,6 @@ setuptools.setup(
         "qpsolvers==4.0.1",
         "cvxopt==1.3.2",
         "openpyxl==3.0.10",
-        "tensorflow==2.15.0",
         "xport==3.6.1",
         "cvxpy==1.4.1",
         "gudhi==3.9.0",
