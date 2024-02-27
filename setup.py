@@ -10,7 +10,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     package_data={'data_reduction': ['Original_repositories/**/*']},
     install_requires=[
-        "IPython==8.22.1",
+        "IPython",
         "scikit-learn==1.3.0",
         "scipy==1.11.4",
         "cython==3.0.2",
